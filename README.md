@@ -1,6 +1,6 @@
 # SI Copilot
 
-This is a Next.js application that allows users to generate synthetic datasets using AI models from Together AI. The application is designed for AI researchers and developers who need high-quality synthetic data for training and fine-tuning AI models.
+This is a Next.js application that allows users to generate synthetic datasets using AI models from Venice AI. The application is designed for AI researchers and developers who need high-quality synthetic data for training and fine-tuning AI models.
 
 ## Features
 
@@ -36,14 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 6. **Generate Dataset**: Click the generate button and wait for your synthetic data
 7. **Download**: Save your dataset as a JSON file
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
