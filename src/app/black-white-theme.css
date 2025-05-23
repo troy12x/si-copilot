@@ -1,0 +1,142 @@
+/* Black and White Theme Overrides */
+
+/* Background colors */
+.bg-theme-primary {
+  background-color: white;
+}
+.dark .bg-theme-primary {
+  background-color: black;
+}
+
+.bg-theme-secondary {
+  background-color: white;
+}
+.dark .bg-theme-secondary {
+  background-color: #111;
+}
+
+.bg-theme-accent {
+  background-color: black;
+}
+.dark .bg-theme-accent {
+  background-color: white;
+}
+
+/* Text colors */
+.text-theme-primary {
+  color: black;
+}
+.dark .text-theme-primary {
+  color: white;
+}
+
+.text-theme-secondary {
+  color: #333;
+}
+.dark .text-theme-secondary {
+  color: #ccc;
+}
+
+.text-theme-accent {
+  color: white;
+}
+.dark .text-theme-accent {
+  color: black;
+}
+
+/* Border colors */
+.border-theme-primary {
+  border-color: #eee;
+}
+.dark .border-theme-primary {
+  border-color: #222;
+}
+
+/* Form elements */
+.input-theme {
+  border: 1px solid #eee;
+  background-color: white;
+  color: black;
+}
+.dark .input-theme {
+  border: 1px solid #333;
+  background-color: #111;
+  color: white;
+}
+
+.input-theme:focus {
+  border-color: black;
+  box-shadow: 0 0 0 1px black;
+}
+.dark .input-theme:focus {
+  border-color: white;
+  box-shadow: 0 0 0 1px white;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: black;
+  color: white;
+  transition: all 0.2s;
+}
+.btn-primary:hover {
+  background-color: #333;
+}
+.dark .btn-primary {
+  background-color: white;
+  color: black;
+}
+.dark .btn-primary:hover {
+  background-color: #ddd;
+}
+
+.btn-secondary {
+  background-color: #f5f5f5;
+  color: black;
+  border: 1px solid #eee;
+}
+.btn-secondary:hover {
+  background-color: #eee;
+}
+.dark .btn-secondary {
+  background-color: #222;
+  color: white;
+  border: 1px solid #333;
+}
+.dark .btn-secondary:hover {
+  background-color: #333;
+}
+
+/* Cards */
+.card-theme {
+  background-color: white;
+  border: 1px solid #eee;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.dark .card-theme {
+  background-color: #111;
+  border: 1px solid #222;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Tables */
+.table-theme thead {
+  background-color: #f9f9f9;
+}
+.dark .table-theme thead {
+  background-color: #222;
+}
+
+.table-theme tbody tr:hover {
+  background-color: #f5f5f5;
+}
+.dark .table-theme tbody tr:hover {
+  background-color: #1a1a1a;
+}
+
+.table-theme th, .table-theme td {
+  border-bottom: 1px solid #eee;
+}
+.dark .table-theme th, .dark .table-theme td {
+  border-bottom: 1px solid #333;
+}

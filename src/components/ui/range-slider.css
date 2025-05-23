@@ -1,0 +1,60 @@
+/* Custom Range Slider Styling */
+
+/* Base styling for the range slider */
+.custom-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e5e5e5; /* Light gray background for the unfilled part */
+  border-radius: 8px;
+  outline: none;
+  height: 8px;
+  position: relative;
+  margin: 10px 0;
+}
+
+/* Styling for the thumb (the draggable circle) */
+.custom-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #F4EDE9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: -6px; /* Center the thumb vertically on the track */
+  position: relative;
+  z-index: 2;
+}
+
+.custom-range-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #F4EDE9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: -6px; /* Center the thumb vertically on the track */
+  position: relative;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+/* Progress styling (the filled part) */
+.custom-range-slider {
+  background: linear-gradient(to right, #000 0%, #000 50%, #e5e5e5 50%, #e5e5e5 100%);
+}
+
+/* JavaScript will dynamically update this background based on slider value */
+.custom-range-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.custom-range-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 8px;
+}
