@@ -138,12 +138,28 @@ export default function DatasetConfig({ onGenerate, isGenerating, error, initial
   });
   
   const [numSamples, setNumSamples] = useState(localConfig?.numSamples || 5);
-  const [selectedModel, setSelectedModel] = useState(localConfig?.model || AVAILABLE_MODELS[0].id);
+  const [provider, setProvider] = useState<APIProvider>(localConfig?.provider || DEFAULT_PROVIDER);
+  
+  // Set the default model based on the selected provider
+  const [selectedModel, setSelectedModel] = useState(() => {
+    // If model is specified in localConfig, use that
+    if (localConfig?.model) return localConfig.model;
+    
+    // Otherwise, set default based on provider
+    const providerToUse = localConfig?.provider || DEFAULT_PROVIDER;
+    if (providerToUse === 'veniceAI') {
+      // Use Llama 3.2 3B as default for Venice AI
+      return "llama-3.2-3b";
+    } else {
+      // Use first available model for Together AI
+      return AVAILABLE_MODELS.find(m => m.provider === 'togetherAI')?.id || AVAILABLE_MODELS[0].id;
+    }
+  });
+  
   const [maxTokens, setMaxTokens] = useState(localConfig?.maxTokens || 4000);
   const [useCustomFormat, setUseCustomFormat] = useState(localConfig?.useCustomFormat || false);
   const [customFormat, setCustomFormat] = useState(localConfig?.customFormat || '{ "messages": [{ "role": "user", "content": "{{input}}" }, { "role": "assistant", "content": "{{output}}" }] }');
   const [customFormatColumnName, setCustomFormatColumnName] = useState(localConfig?.customFormatColumnName || 'messages');
-  const [provider, setProvider] = useState<APIProvider>(localConfig?.provider || DEFAULT_PROVIDER);
   
   // Initialize columns with initialConfig values or defaults
   const [columns, setColumns] = useState<ColumnDefinition[]>(
