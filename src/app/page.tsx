@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { AVAILABLE_MODELS, DatasetSplit } from "@/lib/together-ai";
+import { AVAILABLE_MODELS, DatasetSplit } from "@/lib/api-clients";
 import DatasetConfig from "@/components/DatasetConfig";
 import DatasetViewer from "@/components/DatasetViewer";
 import { CustomersSectionDemo } from "@/components/ui/simplified-customers-demo";

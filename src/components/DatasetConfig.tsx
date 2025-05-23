@@ -686,8 +686,11 @@ export default function DatasetConfig({ onGenerate, isGenerating, error, initial
           type="number"
           min="1"
           max="50"
-          value={numSamples}
-          onChange={(e) => setNumSamples(parseInt(e.target.value))}
+          value={numSamples || 5}
+          onChange={(e) => {
+            const value = parseInt(e.target.value);
+            setNumSamples(isNaN(value) ? 5 : value);
+          }}
           className="w-full p-3 border border-gray-100 dark:border-gray-800 rounded-md bg-white dark:bg-black text-black dark:text-white focus:ring-1 focus:ring-black dark:focus:ring-white focus:border-black dark:focus:border-white"
         />
       </div>

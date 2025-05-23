@@ -361,23 +361,30 @@ export default function GeneratePage() {
             });
           } else {
             // BATCHED APPROACH FOR LARGER DATASETS
-            // For datasets larger than the threshold, process in fixed-size batches
-            let remainingItems = splitItemCount;
-            let startIndex = 0;
+          // For datasets larger than the threshold, process in fixed-size batches
+          let remainingItems = splitItemCount;
+          let batchIndex = 0;
+          
+          // Set up retry parameters
+          const MAX_RETRIES = 3; // Maximum number of retry attempts per batch
+          const INITIAL_BACKOFF = 1000; // Initial backoff in milliseconds (1 second)
+          
+          // Variable to track the current batch size, defined outside loops for wider scope
+          let currentBatchSize = 0;
+          
+          // IMPORTANT: For the first batch, always process items 0-4 to fix the issue with placeholders
+          // Process each batch until we've generated all items
+          while (remainingItems > 0) {
+            // Determine the size of this batch (always BATCH_SIZE except for the last batch)
+            currentBatchSize = Math.min(BATCH_SIZE, remainingItems);
             
-            // Set up retry parameters
-            const MAX_RETRIES = 3; // Maximum number of retry attempts per batch
-            const INITIAL_BACKOFF = 1000; // Initial backoff in milliseconds (1 second)
+            // Calculate the start index for this batch
+            // For the first batch, always start at index 0
+            let startIndex = batchIndex === 0 ? 0 : (splitItemCount - remainingItems);
             
-            // Variable to track the current batch size, defined outside loops for wider scope
-            let currentBatchSize = 0;
+            console.log(`Processing batch ${batchIndex+1}: items ${startIndex} to ${startIndex+currentBatchSize-1} of ${splitItemCount}`);
             
-            // Process each batch until we've generated all items
-            while (remainingItems > 0) {
-              // Determine the size of this batch (always BATCH_SIZE except for the last batch)
-              currentBatchSize = Math.min(BATCH_SIZE, remainingItems);
-              
-              try {
+            try {
                 // Create a configuration for this batch
                 const batchConfig = {
                   ...config,
@@ -387,7 +394,7 @@ export default function GeneratePage() {
               
                 // Update progress to show which batch we're working on
                 setGenerationProgress({
-                  current: splitItemCount - remainingItems,
+                  current: startIndex,
                   total: splitItemCount,
                   split: split.name
                 });
@@ -480,10 +487,24 @@ export default function GeneratePage() {
                 const updated = { ...prev };
                 const items = [...updated[split.name]];
                 
+                console.log(`Replacing placeholders at indices ${startIndex} to ${startIndex + Math.min(realItems.length, currentBatchSize) - 1}`);
+                console.log(`Current batch has ${realItems.length} real items`);
+                
                 // Replace each placeholder with its corresponding real item
                 for (let i = 0; i < Math.min(realItems.length, currentBatchSize); i++) {
                   const globalIndex = startIndex + i;
-                  items[globalIndex] = { id: `${split.name}-${globalIndex}`, ...realItems[i] };
+                  
+                  // Ensure we're not out of bounds
+                  if (globalIndex < items.length) {
+                    // Create a new item with the id from the placeholder and content from the real item
+                    items[globalIndex] = { 
+                      id: `${split.name}-${globalIndex}`, 
+                      ...realItems[i],
+                      // Ensure these fields are definitely replaced
+                      input: realItems[i].input || `Generated input ${globalIndex + 1}`,
+                      output: realItems[i].output || `Generated output ${globalIndex + 1}`
+                    };
+                  }
                 }
                 
                 // If we got fewer items than expected, fill in the missing ones with defaults
@@ -527,7 +548,7 @@ export default function GeneratePage() {
               
               // Update for next iteration
               remainingItems -= currentBatchSize;
-              startIndex += currentBatchSize;
+              batchIndex++;
               
               // Small delay between batches to allow UI updates
               await new Promise(resolve => setTimeout(resolve, 100));
