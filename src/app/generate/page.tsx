@@ -729,7 +729,26 @@ export default function GeneratePage() {
     <div className="min-h-screen bg-[#F4EDE9] text-black">
       <header className="border-b border-gray-300">
         <div className="max-w-full px-4 py-3 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-black" style={{fontFamily: 'var(--font-quincy), serif'}}>SI Copilot</h1>
+          <div className="flex items-center">
+            <h1 className="text-xl font-bold text-black" style={{fontFamily: 'var(--font-quincy), serif'}}>SI Copilot</h1>
+            <div className="flex items-center ml-3 text-base text-gray-700">
+              <span style={{fontFamily: 'var(--font-quincy), serif'}}>Powered by</span>
+              <a 
+                href="https://venice.ai" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center mx-1 hover:text-blue-600 transition-colors duration-200"
+                title="Visit Venice AI"
+              >
+                <span className="font-medium" style={{fontFamily: 'var(--font-quincy), serif'}}>Venice AI</span>
+                <img 
+                  src="https://assets.basehub.com/7ff2dc8c/1d469bb1eed4dffde6e90e57c4286a64/venice.png?width=384&quality=90&format=auto" 
+                  alt="Venice Logo" 
+                  className="h-7 w-7 object-contain ml-1" 
+                />
+              </a>
+            </div>
+          </div>
           <div className="flex items-center space-x-2">
             <Button variant="outline" size="sm" asChild className="text-black border-gray-400 hover:bg-gray-200 hover:text-black rounded-full">
               <Link href="/dashboard">Dashboard</Link>
